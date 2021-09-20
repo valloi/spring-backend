@@ -17,7 +17,7 @@ public interface MediaFileMapper {
 
     @Named("toBase64")
     default String bytesToBase64(byte[] in) {
-        return in.length == 0 ? null : Base64.getEncoder().encodeToString(in);
+        return (in == null || in.length == 0) ? null : Base64.getEncoder().encodeToString(in);
     }
 
 }

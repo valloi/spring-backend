@@ -14,7 +14,6 @@ class MediaFileMapperTest {
 
     @Test
     void shouldMapFromEntity() {
-
         MediaFile mediaFile = getMediaFile(contents);
 
         MediaFileDto mediaFileDto = mediaFileMapper.fromEntity(mediaFile);
@@ -45,6 +44,28 @@ class MediaFileMapperTest {
         Assertions.assertEquals("file", mediaFileBase64.getName());
         Assertions.assertEquals("txt", mediaFileBase64.getExtension());
         Assertions.assertEquals("YWJjZGVmIw==", mediaFileBase64.getContentsBase64());
+    }
+
+    @Test
+    void shouldMapToBase64WithNullContents() {
+        MediaFile mediaFile = getMediaFile(null);
+
+        MediaFileBase64 mediaFileBase64 = mediaFileMapper.toBase64(mediaFile);
+
+        Assertions.assertEquals("file", mediaFileBase64.getName());
+        Assertions.assertEquals("txt", mediaFileBase64.getExtension());
+        Assertions.assertNull(mediaFileBase64.getContentsBase64());
+    }
+
+    @Test
+    void shouldMapToBase64WithZeroBytesContents() {
+        MediaFile mediaFile = getMediaFile(new byte[0]);
+
+        MediaFileBase64 mediaFileBase64 = mediaFileMapper.toBase64(mediaFile);
+
+        Assertions.assertEquals("file", mediaFileBase64.getName());
+        Assertions.assertEquals("txt", mediaFileBase64.getExtension());
+        Assertions.assertNull(mediaFileBase64.getContentsBase64());
     }
 
     private MediaFile getMediaFile(byte[] contents) {
