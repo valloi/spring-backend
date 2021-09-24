@@ -1,5 +1,6 @@
 package org.vi.app.service;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -11,10 +12,10 @@ import java.io.IOException;
 
 @Service
 @Log4j2
+@AllArgsConstructor
 public class FileService {
 
-    @Autowired
-    ResourceLoader resourceLoader;
+    private final ResourceLoader resourceLoader;
 
     public byte[] getWhiskeyFile() {
         Resource resource = resourceLoader.getResource("classpath:files/Whiskey_in_the_jar.pdf");
