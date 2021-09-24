@@ -24,8 +24,7 @@ public class FileController {
     public ResponseEntity<byte[]> getFile() {
         return ResponseEntity
                 .ok()
-                .contentType(
-                        MediaType.parseMediaType("application/pdf"))
+                .contentType(MediaType.APPLICATION_PDF)
                 .header("Content-Disposition", "attachment;filename=\"Whiskey_in_the_jar.pdf\"")
                 .body(fileService.getWhiskeyFile());
     }
@@ -37,8 +36,7 @@ public class FileController {
 
         return ResponseEntity
                 .ok()
-                .contentType(
-                        MediaType.parseMediaType("application/zip"))
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .header("Content-Disposition", "attachment;filename=\"documents.zip\"")
                 .body(zipMediaFiles(whiskeyFile, orcFile));
     }
